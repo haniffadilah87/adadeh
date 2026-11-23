@@ -1,0 +1,353 @@
+:root {
+  --bg-top: #1d152c;
+  --bg-bottom: #38234a;
+  --window-bg: #fff8e7;
+  --border-dark: #2d1b2e;
+  --primary: #e63946;
+  --primary-shadow: #9b1c26;
+  --secondary: #d8d8d8;
+  --secondary-shadow: #8c8c8c;
+  --wa-green: #25d366;
+  --wa-shadow: #128c7e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  image-rendering: pixelated;
+}
+
+body {
+  font-family: "VT323", monospace;
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+  color: var(--border-dark);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 20px;
+  position: relative;
+}
+
+/* Bintang-bintang pixel di background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  background: transparent;
+  box-shadow:
+    12vw 15vh #ffffff55,
+    28vw 8vh #ffd16666,
+    45vw 22vh #ffffff44,
+    68vw 12vh #ffffff55,
+    85vw 19vh #ff758f66,
+    92vw 35vh #ffffff44,
+    18vw 42vh #ffd16655,
+    76vw 48vh #ffffff55,
+    10vw 65vh #ffffff44,
+    88vw 65vh #ffd16666;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Taman Bunga Mawar Pixel di Bagian Bawah Layar */
+.pixel-garden {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  pointer-events: none;
+  z-index: 2;
+  padding: 0 10px;
+}
+
+.pixel-rose-plant {
+  width: 48px;
+  height: 76px;
+  animation: swayRose 2.4s steps(2) infinite alternate;
+  transform-origin: bottom center;
+}
+
+.pixel-rose-plant:nth-child(even) {
+  animation-delay: 0.8s;
+  transform: scale(0.88);
+}
+
+@keyframes swayRose {
+  0% {
+    transform: rotate(-3deg);
+  }
+  100% {
+    transform: rotate(3deg);
+  }
+}
+
+/* Partikel Melayang (Hati & Kelopak/Mawar Mini) */
+.floating-hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.heart-particle {
+  position: absolute;
+  bottom: -40px;
+  color: #ff758f;
+  font-family: "Press Start 2P", monospace;
+  animation: floatUp linear infinite;
+  user-select: none;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+
+/* Tahap 1: Amplop Pixel */
+.envelope-wrapper {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s steps(2);
+}
+
+.envelope-wrapper:hover {
+  transform: translateY(-6px);
+}
+
+.pixel-envelope {
+  width: 260px;
+  height: 170px;
+  background: #ff8fa3;
+  margin: 0 auto;
+  position: relative;
+  border: 4px solid var(--border-dark);
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 85px;
+  background: #ff4d6d;
+  border-bottom: 4px solid var(--border-dark);
+  transform-origin: top;
+  transition: transform 0.3s steps(3);
+  z-index: 2;
+}
+
+.pixel-envelope.open .envelope-flap {
+  transform: scaleY(0);
+}
+
+.pixel-heart-seal {
+  width: 48px;
+  height: 48px;
+  background: var(--primary);
+  border: 4px solid var(--border-dark);
+  color: white;
+  font-family: "Press Start 2P", monospace;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  animation: blinkHeart 1s steps(2) infinite;
+}
+
+@keyframes blinkHeart {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.envelope-hint {
+  margin-top: 24px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.75rem;
+  color: #ffd166;
+  text-shadow: 3px 3px 0px #000;
+  animation: blinkText 1.2s steps(2) infinite;
+}
+
+@keyframes blinkText {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Tahap 2 & 3: Kotak Dialog RPG */
+.rpg-window {
+  display: none;
+  position: relative;
+  z-index: 10;
+  background: var(--window-bg);
+  max-width: 520px;
+  width: 100%;
+  border: 4px solid var(--border-dark);
+  box-shadow:
+    inset -4px -4px 0px #e6d5b8,
+    8px 8px 0px rgba(0, 0, 0, 0.45);
+  padding: 0;
+  text-align: left;
+  margin-bottom: 40px; /* Supaya tidak menutupi barisan mawar di bawah */
+}
+
+.rpg-title-bar {
+  background: var(--border-dark);
+  color: #ffd166;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.75rem;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.letter-body {
+  padding: 24px 24px 12px;
+  font-size: 1.45rem;
+  line-height: 1.45;
+  min-height: 150px;
+  white-space: pre-line;
+}
+
+.question-box {
+  padding: 12px 24px 28px;
+  opacity: 0;
+  text-align: center;
+}
+
+.question-box.visible {
+  opacity: 1;
+}
+
+.question-text {
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+
+.funny-msg {
+  font-size: 1.2rem;
+  color: #6c584c;
+  min-height: 24px;
+  margin-bottom: 16px;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.btn-pixel {
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.75rem;
+  padding: 14px 20px;
+  border: 4px solid var(--border-dark);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.1s steps(2);
+}
+
+.btn-pixel:active {
+  transform: translate(4px, 4px);
+  box-shadow: none !important;
+}
+
+.btn-yes {
+  background: var(--primary);
+  color: white;
+  box-shadow: 4px 4px 0px var(--primary-shadow);
+}
+
+.btn-no {
+  background: var(--secondary);
+  color: var(--border-dark);
+  box-shadow: 4px 4px 0px var(--secondary-shadow);
+}
+
+.success-screen {
+  text-align: center;
+}
+
+.success-icon {
+  font-family: "Press Start 2P", monospace;
+  font-size: 3rem;
+  color: var(--primary);
+  margin: 24px 0 12px;
+  animation: blinkHeart 0.8s steps(2) infinite;
+}
+
+.success-title {
+  font-family: "Press Start 2P", monospace;
+  font-size: 1.15rem;
+  color: var(--border-dark);
+  margin-bottom: 16px;
+}
+
+.success-desc {
+  padding: 0 24px;
+  font-size: 1.4rem;
+  line-height: 1.4;
+  margin-bottom: 24px;
+}
+
+.btn-wa {
+  background: var(--wa-green);
+  color: white;
+  box-shadow: 4px 4px 0px var(--wa-shadow);
+  margin-bottom: 28px;
+}
+
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 20;
+}

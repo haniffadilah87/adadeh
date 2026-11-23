@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quest Baru: Pesan Untukmu</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Background Bintang, Hati & Mawar Pixel -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+    <div class="pixel-garden" id="pixelGarden"></div>
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Tahap 1: Amplop Pixel -->
+    <div class="envelope-wrapper" id="envelopeWrapper" onclick="openLetter()">
+      <div class="pixel-envelope" id="envelope">
+        <div class="envelope-flap"></div>
+        <div class="pixel-heart-seal">♥</div>
+      </div>
+      <p class="envelope-hint">[ KLIK UNTUK BUKA SURAT ]</p>
+    </div>
+
+    <!-- Tahap 2: Kotak Dialog RPG -->
+    <div class="rpg-window" id="letterCard">
+      <div class="rpg-title-bar">
+        <span id="letterTitle">TO: ALYA</span>
+        <span>LV.99</span>
+      </div>
+      <div class="letter-body" id="typewriterText"></div>
+
+      <div class="question-box" id="questionBox">
+        <p class="question-text" id="questionText">
+          Mau nggak jadi pasangan aku?
+        </p>
+        <p class="funny-msg" id="funnyMsg"></p>
+        <div class="btn-group">
+          <button
+            class="btn-pixel btn-yes"
+            id="btnYes"
+            onclick="acceptConfession()"
+          >
+            > MAU BANGET
+          </button>
+          <button
+            class="btn-pixel btn-no"
+            id="btnNo"
+            onmouseover="dodgeButton()"
+            onclick="dodgeButton()"
+          >
+            NGGAK DULU
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tahap 3: Quest Selesai -->
+    <div class="rpg-window success-screen" id="successScreen">
+      <div class="rpg-title-bar">
+        <span>QUEST COMPLETED!</span>
+        <span>★</span>
+      </div>
+      <div class="success-icon">♥</div>
+      <h2 class="success-title">PARTY FORMED!</h2>
+      <p class="success-desc" id="successDesc">
+        Makasih ya sudah mau nerima aku. Mulai hari ini, petualangan kita resmi
+        dimulai!
+      </p>
+      <a href="#" target="_blank" class="btn-pixel btn-wa" id="waLink">
+        KIRIM PESAN KE WA
+      </a>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
